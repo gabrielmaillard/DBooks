@@ -181,45 +181,64 @@ export class Book {
 
     /**
      * Use the datas gotten from the Web (#getDatasW) for the properties
-     */
+     */    
     async useDatasW() {
         const results = await this.#getDatasW(this.#isbn);
         console.log(results);
         
         // Extract datas into variables
-        const gbResults = results["2"]["items"]['0']["volumeInfo"]; // GoogleBooksAPI Results
-        const olResults = results[0][`ISBN:${this.#isbn}`]["details"];
-        olResults["subjects"] = results[1][`ISBN:${this.#isbn}`]["subjects"]; // Modify the OpenLibrary results to add it the subjects
-        olResults["authors"] = results[1][`ISBN:${this.#isbn}`]["authors"];
-        olResults["covers"] = results[1][`ISBN:${this.#isbn}`]["cover"];
-
-        // Get the cover URI : GoogleBooks / OpenLibrary
-        this.#coverURI = ((olResults?.covers?.large ?? gbResults?.imageLinks?.thumbnail) ?? OpenLibrary.getCover(olResults?.covers?.[0])) ?? "https://placehold.co/260x398?text=Couverture+\\n+indisponible";
-        if (this.#coverURI.slice(0, 5) !== "https") { // Make http URL become an HTTPS URL
-            this.#coverURI = "https" + this.#coverURI.substring(4);
+        const gbResults = results[2]?.items?.[0]?.volumeInfo; // GoogleBooksAPI Results
+        let olDetails = results[0]?.[`ISBN:${this.#isbn}`]?.details;
+        let olData = results[1]?.[`ISBN:${this.#isbn}`];
+        let olSubjects = olData?.subjects ?? [];
+        let olAuthors = olData?.authors ?? [];
+        let olCovers = olData?.cover ?? [];
+    
+        // Check if OpenLibrary returned data
+        if (!olDetails) {
+            // If OpenLibrary doesn't return anything, set properties to empty values
+            this.#coverURI = "https://placehold.co/260x398?text=Couverture+\\n+indisponible";
+            this.#title = "";
+            this.#fullDescription = "";
+            this.#languageCode = "";
+            this.#publishedDate = "";
+            this.#publisher = "";
+            this.#pageCount = 0;
+            this.#subjects = [];
+            this.#authorsKeysNames = [];
+            return;
         }
+    
+        // Get the cover URI : GoogleBooks / OpenLibrary
+        this.#coverURI = (
+            (olCovers.large ?? gbResults?.imageLinks?.thumbnail) ??
+            (typeof OpenLibrary.getCover === 'function' && olCovers[0] ? OpenLibrary.getCover(olCovers[0]) : undefined) ??
+            "https://placehold.co/260x398?text=Couverture+\\n+indisponible"
+        );
+    
         // Title : OpenLibrary / GoogleBooks
-        this.#title = olResults?.title ?? gbResults?.title;
+        this.#title = olDetails?.title ?? gbResults?.title;
         // Full description : GoogleBooks / OpenLibrary
-        this.#fullDescription = gbResults?.description ?? olResults?.description; // CHECK IF IT IS REALLY .DESCRIPTION FOR OPENLIBRARY
+        this.#fullDescription = gbResults?.description ?? olDetails?.description; // CHECK IF IT IS REALLY .DESCRIPTION FOR OPENLIBRARY
         // Language Code : GoogleBooks
         this.#languageCode = gbResults?.language; // CHECK FOR OPENLIBRARY
         // Published date : GoogleBooks / OpenLibrary
-        this.#publishedDate = gbResults?.publishedDate ?? olResults?.publish_date;
+        this.#publishedDate = gbResults?.publishedDate ?? olDetails?.publish_date;
         // Publisher : OpenLibrary / GoogleBooks
-        this.#publisher = olResults?.publishers?.[0] ?? gbResults?.publisher;
+        this.#publisher = olDetails?.publishers?.[0] ?? gbResults?.publisher;
         // Page count : GoogleBooks
         this.#pageCount = gbResults?.pageCount; // CHECK IF EXISTS IN OPENLIBRARY
         // Subjects : OpenLibrary
-        this.#subjects = olResults?.subjects?.map(subject => subject['name']);
+        this.#subjects = olSubjects.map(subject => subject['name']);
         // Authors Keys/Names : OpenLibrary
-        this.#authorsKeysNames = olResults?.authors?.map(keyName => {
+        this.#authorsKeysNames = olAuthors.map(keyName => {
             return {
                 key: keyName["url"].split("/")[keyName["url"].split("/").length - 2],
                 authorName: keyName["name"]
             }
         });
     }
+    
 
     /**
      * Get datas about a book from the Database
