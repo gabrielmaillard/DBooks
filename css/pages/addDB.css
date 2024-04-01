@@ -1,0 +1,155 @@
+/* Header */
+
+body {
+    padding: 40px;
+}
+
+#header {
+    min-height: 190px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    background-color: white;
+    gap: 130px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: 2px solid #6C80E8;
+    border-radius: 12px;
+}
+
+#header #form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+}
+
+/* Header form inputs */
+#isbn10 {
+    width: 160px;
+}
+
+#isbn13 {
+    width: 180px;
+}
+
+/*
+Container
+*/
+
+#result {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+
+
+
+
+/* --- Template BookFullPage --- */
+
+/*
+Left part
+*/
+
+.left-card {
+    max-width: 260px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.left-card .btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.left-card .cover {
+    width: 100%;
+}
+
+.left-card .cover .cover-image {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/*
+About section
+*/
+
+.about {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+@media screen and (min-width: 1400px) {
+    .about {
+        flex-direction: row;
+    }
+}
+
+/*
+About section --> main section
+*/
+.main {
+    margin-right: 30px;
+    max-width: 700px;
+}
+
+.main .main-header {
+    margin-bottom: 30px;
+}
+
+.main .main-header h1 {
+    font-size: 50px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.main .main-header h5 {
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.main .text {
+    font-size: 16px;
+}
+/*
+About section --> Additional Datas
+*/
+.additional-data {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+#tags-list {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    row-gap: 5px;
+    font-size: 18px;
+}
+
+#rating .google-books-mark {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    display: inline-block;
+    width: calc(18px*3.2);
+    height: 18px;
+}
+
+#rating .google-books-mark img {
+    width: 18px;
+    vertical-align: text-top;
+    display: inline;
+}

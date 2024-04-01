@@ -1,0 +1,61 @@
+/*
+Header
+*/
+
+body {
+    padding: 40px;
+}
+
+#header {
+    min-height: 190px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    background-color: white;
+    gap: 130px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: 2px solid #6C80E8;
+    border-radius: 12px;
+}
+
+/*
+Content
+*/
+
+#results {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+
+
+/*
+Book card template
+*/
+
+.book-card {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    max-width: 635px;
+    gap: 25px;
+    border: 2px solid #6C80E8;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.book-card .left-part img {
+    border: none;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.book-card .right-part .header {
+    margin-bottom: 15px;
+}

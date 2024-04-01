@@ -1,0 +1,26 @@
+/* Header */
+
+body {
+    padding: 40px;
+}
+
+#header {
+    min-height: 190px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    background-color: white;
+    gap: 130px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: 2px solid #6C80E8;
+    border-radius: 12px;
+}
+
+#header #form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+}
