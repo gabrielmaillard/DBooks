@@ -23,7 +23,7 @@ try {
     }
 
     $title = $_POST['title'];
-    $description = $_POST['description'];
+    $description = checkNull($_POST['description']) ?? "Aucune description n'est disponible";
     $publisherName = $_POST['publisherName'];
     $idLocation = $_POST['idLocation'];
     $pageCount = $_POST['pageCount'];
@@ -82,21 +82,23 @@ try {
 
     // DOWNLOAD THE COVER
     $coverURI = $_POST["coverURI"];
+    // Getting the unique id image
+    $query = 'SELECT `idImage` FROM `Books` WHERE `isbn` = :isbn';
+    $statement = $db->prepare($query);
+    $statement->execute([
+        "isbn" => $isbn 
+    ]);
+    $idImage = $statement->fetchColumn();
     if (isValidURL($coverURI)) {
         $headers = get_headers($coverURI, 1);
         $contentType = $headers["Content-Type"];
         
         // Check if it is a jpeg image
         // if ($contentType === "image/jpg") {
-        // Getting the unique id image
-        $query = 'SELECT `idImage` FROM `Books` WHERE `isbn` = :isbn';
-        $statement = $db->prepare($query);
-        $statement->execute([
-            "isbn" => $isbn 
-        ]);
-        $idImage = $statement->fetchColumn();
         file_put_contents("../images/" . $idImage . ".jpeg", fopen($coverURI, 'r')); // Save file with read permission
         // }
+    } else {
+        file_put_contents("../images/" . $idImage . ".jpeg", fopen('https://placehold.co/260x398.jpeg?text=' . urlencode(splitTitle($title)), 'r')); // Save file with read permission
     }
 
     // Commit the transaction
@@ -111,4 +113,46 @@ try {
 function isValidURL($url) {
     return (strpos($url, "https://books.google.com") === 0) || 
            (strpos($url, "https://covers.openlibrary.org") === 0);
+}
+
+function checkNull($arg) {
+    if ($arg == "null" || $arg == "undefined") {
+        return;
+    } else {
+        return $arg;
+    }
+}
+
+function getClosest($array, $search, $currentPosition) {
+    $closestIndex = null;
+    $length = count($array);
+
+    $leftParser = $currentPosition;
+    $rightParser = $currentPosition;
+
+    while (!$closestIndex && ($leftParser >= 0 || $rightParser <= $length)) {
+        if ($leftParser >= 0) {
+            $leftParser -= 1;
+            if ($array[$leftParser] == $search) {
+                $closestIndex = $leftParser;
+            }
+        } elseif (!$closestIndex && ($rightParser <= $length)) {
+            $leftParser += 1;
+            if ($array[$rightParser] == $search) {
+                $closestIndex = $rightParser;
+            }
+        }
+    }
+
+    return $closestIndex;
+}
+
+function splitTitle($title) {
+    $array = str_split($title);
+
+    for ($i = 1; $i <= floor(count($array)/20); $i++) {
+        $array[getClosest($array, ' ', 20*$i)] = '\n';
+    }
+    
+    return implode('', $array);
 }

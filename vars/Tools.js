@@ -146,4 +146,4 @@ export const Languages = {
     'tl': 'Filipino',
 };
 
-export const key = 'AIzaSyCObA2UaU1zPG_3NhS1wxjoBAIjp_G_XV8';
+export const key = '';
