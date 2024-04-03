@@ -98,7 +98,7 @@ if (isset($_GET["isbn"])) {
             </div>
             <div class="btns">
                 <button class="primary" id="add-to-db">Ajouter à la Bibliothèque <img class="emoji" src="emojis/📄.svg" alt="Red book emoji" srcset=""></button>
-                <button class="add-list secondary">Ajouter aux envies <img class="emoji" src="emojis/🕘.svg" alt="Red book emoji" srcset=""></button>
+                <button class="add-list secondary" style="display: none;">Ajouter aux envies <img class="emoji" src="emojis/🕘.svg" alt="Red book emoji" srcset=""></button>
             </div>
         </div>
         <div class="about">
