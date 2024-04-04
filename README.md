@@ -45,4 +45,4 @@ La représentation d'un livre est également réalisée via une classe.
 2. Visualiser
 ![Capture d'écran de la fonctionnalité "Visualiser"](README/Visualiser.JPG)
 3. Rechercher
-![Capture d'écran d'une recherche](README/Visualiser.JPG)
+![Capture d'écran d'une recherche](README/Rechercher.JPG)
