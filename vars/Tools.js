@@ -1,5 +1,3 @@
-// NOT WORKING
-
 export function underlineWithUnderscores(text) {
     // Regular expression to match text surrounded by underscores
     const regex = /_([^_]+)_/g;
