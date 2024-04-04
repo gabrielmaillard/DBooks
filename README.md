@@ -8,7 +8,7 @@ L'ISBN est généralement imprimé sur la page de droits d'auteur ou à l'arriè
 
 ## API
 
-[Schéma simplifié des échanges entre le client, le serveur et les APIs](README/Fonctionnement%20simplifié.JPG)
+![Schéma simplifié des échanges entre le client, le serveur et les APIs](README/Fonctionnement%20simplifié.JPG)
 
 Afin d'obtenir les différentes données sur un ouvrage, le serveur utilise deux principales interfaces de programmation d'applications (API) :
 
@@ -41,8 +41,8 @@ La représentation d'un livre est également réalisée via une classe.
 ## Fonctionnalités
 
 1. Ajout / Suppression
-[Capture d'écran de l'ajout d'un livre](README/Ajouter.JPG)
+![Capture d'écran de l'ajout d'un livre](README/Ajouter.JPG)
 2. Visualiser
-[Capture d'écran de la fonctionnalité "Visualiser"](README/Visualiser.JPG)
+![Capture d'écran de la fonctionnalité "Visualiser"](README/Visualiser.JPG)
 3. Rechercher
-[Capture d'écran d'une recherche](README/Visualiser.JPG)
+![Capture d'écran d'une recherche](README/Visualiser.JPG)
