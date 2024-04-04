@@ -112,7 +112,8 @@ try {
 
 function isValidURL($url) {
     return (strpos($url, "https://books.google.com") === 0) || 
-           (strpos($url, "https://covers.openlibrary.org") === 0);
+           (strpos($url, "https://covers.openlibrary.org") === 0) ||
+           (strpos($url, "http://books.google.com") === 0);
 }
 
 function checkNull($arg) {

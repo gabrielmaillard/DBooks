@@ -111,7 +111,7 @@ export class Book {
     #transformIntoAddButton(prevButton) {
         const button = prevButton.cloneNode(true);
 
-        button.innerText = "Ajouter à la Base ";
+        button.innerText = "Ajouter à la Bibliothèque ";
         button.setAttribute("id", "add-to-database");
         button.classList.remove("primary-red");
         button.classList.add("primary");
@@ -127,12 +127,14 @@ export class Book {
                 });
         });
         
+        /*
         const image = document.createElement("img");
         image.setAttribute("src", "emojis/📄.svg");
         image.setAttribute("alt", "File emoji");
         image.classList.add("emoji");
 
         button.append(image);
+        */
         prevButton.parentNode.replaceChild(button, prevButton);
     }
 
@@ -143,7 +145,7 @@ export class Book {
     #transformIntoRemoveButton(prevButton) {
         const button = prevButton.cloneNode(true);
 
-        button.innerText = "Supprimer de la Base ";
+        button.innerText = "Supprimer de la Bibliothèque ";
         button.setAttribute("id", "remove-from-database");
         button.classList.remove("primary");
         button.classList.add("primary-red");
@@ -154,13 +156,14 @@ export class Book {
                     this.#transformIntoAddButton(button);
                 });
         });
-
+        /*
         const image = document.createElement("img");
         image.setAttribute("src", "emojis/🗑.svg");
         image.setAttribute("alt", "Trash can emoji");
         image.classList.add("emoji");
 
         button.append(image);
+        */
         prevButton.parentNode.replaceChild(button, prevButton);
     }
     

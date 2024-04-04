@@ -1,4 +1,4 @@
-import { key } from "../../vars/Tools";
+import { key, convertISBN10to13 } from "../../vars/Tools";
 import { Book } from "../classes/Book";
 import { GoogleBooks } from "../classes/GoogleBooks";
 import { OpenLibrary } from "../classes/OpenLibrary";

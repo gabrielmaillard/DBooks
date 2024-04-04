@@ -145,8 +145,5 @@ export const Languages = {
     'id': 'Bahasa Indonesia',
     'tl': 'Filipino',
 };
-<<<<<<< HEAD
 
 export const key = '';
-=======
->>>>>>> 0c01a3c54725e74ad9195268d702aa7622a7d6bb
